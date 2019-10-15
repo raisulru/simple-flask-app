@@ -1,11 +1,11 @@
 import click
 from flask import Flask, redirect, url_for
 from .config import *
-from .Controllers import Apiv1Routes, ErrorRoutes
+# from .Controllers import Apiv1Routes, ErrorRoutes
 from .Models import User, Database 
 
 # App init
-app = Flask(__name__, static_folder=Config.STATIC_FOLDER, template_folder=Config.TEMPLATE_FOLDER)
+app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
 # Database and Marshmallow init to avoid cycling import
@@ -13,8 +13,8 @@ Database.db.init_app(app)
 Database.ma.init_app(app)
 
 # Blueprint register
-app.register_blueprint(Apiv1Routes.bp, url_prefix='/api/v1')
-app.register_blueprint(ErrorRoutes.bp)
+# app.register_blueprint(Apiv1Routes.bp, url_prefix='/api/v1')
+# app.register_blueprint(ErrorRoutes.bp)
 
 # This can be deleted!
 @app.route("/")
